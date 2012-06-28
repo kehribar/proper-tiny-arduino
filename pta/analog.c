@@ -9,27 +9,12 @@
 
 #include "analog.h"
 
-uint8_t adcStatus = 0;
-
-inline void open_adc()
-{
-	// No prescale	 Voltage ref: VDD
-	ADCSRA = (1<<ADEN);
-	adcStatus = 1;
-}
-
-inline void close_adc()
-{
-	ADCSRA = 0x00;
-	adcStatus = 0;
-}
 
 uint16_t analogRead(uint8_t ch)
 {
 	uint16_t value;
-
-	if(adcStatus == 0)
-		open_adc();
+		
+	ADCSRA = (1<<ADEN); // Prescaler:2 ,Voltage ref: VDD
 
 	ADMUX = ch; 	
 	
