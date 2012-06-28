@@ -9,7 +9,7 @@
 
 #include "analog.h"
 
-static uint8_t adcStatus = 0;
+uint8_t adcStatus = 0;
 
 inline void open_adc()
 {
