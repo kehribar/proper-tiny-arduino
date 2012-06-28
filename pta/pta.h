@@ -16,7 +16,7 @@
 
 /*
 	Todo: 
-		* analogWrite(); // very bad name for the PWM function.
+		* analogWrite(); // very bad name for the PWM function.	
 		* servo stuff
 			- attachServo
 			- detachServo
@@ -28,4 +28,6 @@
 		* spi library
 		* pin change interrupt example
 		* timer interrupt example
+		* library and examples on how to extend pins with the shift registers
+		* LCD library to use with shift registers.
 */
