@@ -11,10 +11,9 @@ PROJECT = main
 CSRC    = main.c analog.c pwm_t84.c tone_t84.c softSerial.c
 ASRC    = suart.S xitoa.S
 VPATH   = ./pta ./pta/elmChan_serial
-F_OSC   = 1000000
-
-### Target device
 DEVICE  = attiny84
+F_OSC   = 1000000
+AVRDUDE = sudo avrdude -c usbtiny -p t84 -U flash:w:$(PROJECT).hex
 
 ###############################################################################
 #
@@ -137,6 +136,9 @@ size:
 	@echo
 	$(SIZE) -C --mcu=$(DEVICE) $(PROJECT).elf
 
+upload:
+	@echo
+	$(AVRDUDE)
 
 # Link: create ELF output file from object files.
 %.elf:  $(AOBJ) $(COBJ)
@@ -161,7 +163,6 @@ $(AOBJ) : $(OBJDIR)/%.o : %.S
 clean:
 	@echo
 	rm -f -r $(OBJDIR) | exit 0
-
 
 # Include the dependency files.
 -include $(shell mkdir $(OBJDIR) 2>/dev/null) $(wildcard $(OBJDIR)/*.d)
