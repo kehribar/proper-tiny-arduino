@@ -13,7 +13,7 @@ ASRC    = suart.S xitoa.S
 VPATH   = ./pta ./pta/elmChan_serial
 DEVICE  = attiny84
 F_OSC   = 1000000
-AVRDUDE = sudo avrdude -c usbtiny -p t84 -U flash:w:$(PROJECT).hex
+AVRDUDE = avrdude -c usbtiny -p t84 -U flash:w:$(PROJECT).hex
 
 ###############################################################################
 #
