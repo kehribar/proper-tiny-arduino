@@ -23,4 +23,7 @@
 #include "tone_t84.h"
 #include "softSerial.h"
 
+#define delay(value) _delay_ms(value)
+#define delayMicroseconds(value) _delay_us(value)
+
 #endif

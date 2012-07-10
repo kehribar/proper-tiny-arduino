@@ -66,7 +66,7 @@ void toneWrite(uint8_t ch, uint8_t val)
 
 /**************************************************************
 / Mode: CTC waveform mode
-/ Clock: F_OSC / 256
+/ Clock: F_OSC / 8
 /*************************************************************/
 void initTone(uint8_t mode)
 {
@@ -77,7 +77,7 @@ void initTone(uint8_t mode)
 			DDRB |= (1<<2);
 			sbi(TCCR0A,COM0A0);
 			sbi(TCCR0A,WGM01);
-			sbi(TCCR0B,CS02); 
+			sbi(TCCR0B,CS01); 
 			break;
 		}
 		case PWM0B:
@@ -85,7 +85,7 @@ void initTone(uint8_t mode)
 			DDRA |= (1<<7);
 			sbi(TCCR0A,COM0B0);
 			sbi(TCCR0A,WGM01);
-			sbi(TCCR0B,CS02); 
+			sbi(TCCR0B,CS01); 
 			break;
 		}
 		case PWM1A:
@@ -94,7 +94,7 @@ void initTone(uint8_t mode)
 			sbi(TCCR1A,COM1A0);
 			sbi(TCCR1B,WGM12);
 			sbi(TCCR1B,WGM13);
-			sbi(TCCR1B,CS12); 
+			sbi(TCCR1B,CS11); 
 			ICR1 = 0xFF;
 			break;
 		}
@@ -104,7 +104,7 @@ void initTone(uint8_t mode)
 			sbi(TCCR1A,COM1B0);
 			sbi(TCCR1B,WGM12);
 			sbi(TCCR1B,WGM13);
-			sbi(TCCR1B,CS12);
+			sbi(TCCR1B,CS11);
 			ICR1 = 0xFF; 
 			break;
 		}

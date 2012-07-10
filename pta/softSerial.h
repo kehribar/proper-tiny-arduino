@@ -32,5 +32,6 @@
 
 void initSerial();
 void xprint(char* tx);
+void readLine(char* lineBuf,uint8_t len);
 
 #endif

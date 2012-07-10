@@ -13,7 +13,7 @@ ASRC    = suart.S xitoa.S
 VPATH   = ./pta ./pta/elmChan_serial
 DEVICE  = attiny84
 F_OSC   = 1000000
-AVRDUDE = sudo avrdude -c usbtiny -p t84 -U flash:w:$(PROJECT).hex
+AVRDUDE = avrdude -c usbtiny -p t84 -U flash:w:$(PROJECT).hex
 
 ###############################################################################
 #
@@ -81,7 +81,6 @@ ALL_ASFLAGS = -mmcu=$(DEVICE) -I. -x assembler-with-cpp $(ASFLAGS) -fdata-sectio
 # Linker flags
 LDFLAGS += -Wl,-lm -Wl,--gc-sections,-Map,$(PROJECT).map
 
-
 # Default target.
 all: version build size
 
@@ -136,10 +135,6 @@ size:
 	@echo
 	$(SIZE) -C --mcu=$(DEVICE) $(PROJECT).elf
 
-upload:
-	@echo
-	$(AVRDUDE)
-
 # Link: create ELF output file from object files.
 %.elf:  $(AOBJ) $(COBJ)
 	@echo
@@ -166,4 +161,9 @@ clean:
 
 # Include the dependency files.
 -include $(shell mkdir $(OBJDIR) 2>/dev/null) $(wildcard $(OBJDIR)/*.d)
+
+upload:
+	@echo
+	$(AVRDUDE) 
+
 

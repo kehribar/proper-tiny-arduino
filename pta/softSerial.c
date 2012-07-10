@@ -24,3 +24,24 @@ void xprint(char* tx)
 		xmit(*tx++);
 }
 
+
+void readLine(char* lineBuf,uint8_t len)
+{
+	uint8_t c, i;
+	len--; i=0;
+
+	xmit('>');	
+	for (;;) 
+	{
+		c = serialRead();
+		if (i == len) break;
+		if (c == '\r' || c == '\n') break;
+		if (c >= ' '){
+			lineBuf[i++] = c;
+			xmit(c);
+		}
+	}
+	lineBuf[i]=0;
+	xmit('\r');	
+	xmit('\n');
+}
