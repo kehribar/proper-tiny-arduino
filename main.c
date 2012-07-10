@@ -27,6 +27,8 @@ int main()
 		xprintf(PSTR("#val: %d\r\n"),i);
 
 		toneWrite(PWM0A,i);
+
+		togglePin(A,6);
 	}
 	
 	return 0;
