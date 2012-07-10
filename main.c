@@ -21,13 +21,20 @@ int main()
 	while(1)
 	{	
 		readLine(buf,64);
-		
-		i=atoi(buf);
+		i=atoi(buf+1);		
 
-		xprintf(PSTR("#val: %d\r\n"),i);
-		xprintf(PSTR("#freq: %d\r\n"),62500/(i+1));
-
-		toneWrite(PWM0A,i);
+		switch(buf[0])
+		{
+			case 'r':
+				analogWrite(0,i);
+			break;
+			case 'g':
+				analogWrite(1,i);
+			break;
+			case 'b':
+				analogWrite(3,i);			
+			break;
+		}
 
 		togglePin(A,6);
 	}
