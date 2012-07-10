@@ -25,6 +25,7 @@ int main()
 		i=atoi(buf);
 
 		xprintf(PSTR("#val: %d\r\n"),i);
+		xprintf(PSTR("#freq: %d\r\n"),62500/(i+1));
 
 		toneWrite(PWM0A,i);
 
