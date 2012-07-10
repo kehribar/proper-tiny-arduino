@@ -7,20 +7,11 @@
  * ----------------------------------------------------------------------------
  */
 
-#ifndef PTA
-#define PTA
-
-#include <avr/io.h>
-#include <avr/pgmspace.h>
-#include <util/delay.h>
-#include <string.h>
-#include <stdio.h> 
-
-#include "macro.h"
-#include "digital.h"
-#include "analog.h"
-#include "pwm_t84.h"
-#include "tone_t84.h"
-#include "softSerial.h"
+#ifndef MACROS
+#define MACROS
+ 
+#define sbi(reg,bit) (reg |= (1<<bit))
+#define cbi(reg,bit) (reg &= ~(1<<bit))
+#define checkBit(reg,bit) (reg&(1<<bit))
 
 #endif

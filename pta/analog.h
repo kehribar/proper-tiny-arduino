@@ -6,8 +6,13 @@
  * this stuff is worth it, you can buy me a coffee in return.
  * ----------------------------------------------------------------------------
  */
+
+#ifndef ANALOG
+#define ANALOG
  
 #include <avr/io.h>
+#include "macro.h"
 
 uint16_t analogRead(uint8_t ch);
 
+#endif

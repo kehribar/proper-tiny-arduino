@@ -7,6 +7,9 @@
 * -----------------------------------------------------------------------------
 */
 
+#ifndef DIGITAL
+#define DIGITAL
+
 #include <avr/io.h>
 
 /******************************************************************************
@@ -23,8 +26,8 @@
 / Definition: Writes high/low to a digital output pin.
 / Example: 
 /
-/     digitalWrite(A,6,LOW);
-/	    digitalWrite(A,7,HIGH);
+/	digitalWrite(A,6,LOW);
+/	digitalWrite(A,7,HIGH);
 /*****************************************************************************/
 #define digitalWrite(port,pin,state) state ? (PORT ## port |= (1<<pin)) : (PORT ## port &= ~(1<<pin))  
 
@@ -33,8 +36,8 @@
 / Definition: Sets the mode of a digital pin as input/output.
 / Example:
 /
-/ 	  pinMode(A,6,OUTPUT);
-/	    pinMode(A,6,INPUT);
+/ 	pinMode(A,6,OUTPUT);
+/	pinMode(A,6,INPUT);
 /*****************************************************************************/
 #define pinMode(port,pin,state) state ? (DDR ## port |= (1<<pin)) : (DDR ## port &= ~(1<<pin))
 
@@ -44,10 +47,10 @@
 / Returns: Zero for low, nonzero for high.
 / Example: If PORTA6 high, set pin PORTA7 high; else low.
 /
-/	    if(digitalRead(A,6))
-/ 	    	digitalWrite(A,7,HIGH);
-/	    else
-/		      digitalWrite(A,7,LOW);
+/	if(digitalRead(A,6))
+/ 		digitalWrite(A,7,HIGH);
+/	else
+/		digitalWrite(A,7,LOW);
 /*****************************************************************************/
 #define digitalRead(port,pin) (PIN ## port & (1<<pin))
 
@@ -56,7 +59,7 @@
 / Definition: Toggles the state of a digital output pin.
 / Example:
 /
-/	    togglePin(A,6);
+/	togglePin(A,6);
 /*****************************************************************************/
 #define togglePin(port,pin) (PIN ## port |= (1<<pin))
 
@@ -66,8 +69,9 @@
 /	input pin.
 / Example:
 /
-/	    internalPullup(A,6,ENABLE);
-/   	internalPullup(A,6,DISABLE);
+/	internalPullup(A,6,ENABLE);
+/	internalPullup(A,6,DISABLE);
 /*****************************************************************************/
 #define internalPullup(port,pin,state) state ? (PORT ## port |= (1<<pin)) : (PORT ## port &= ~(1<<pin))
 
+#endif

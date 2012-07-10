@@ -1,0 +1,26 @@
+/*
+* ----------------------------------------------------------------------------
+* “THE COFFEEWARE LICENSE” (Revision 1):
+* <ihsan@kehribar.me> wrote this file. As long as you retain this notice you
+* can do whatever you want with this stuff. If we meet some day, and you think
+* this stuff is worth it, you can buy me a coffee in return.
+* -----------------------------------------------------------------------------
+*/
+
+#include "softSerial.h"
+
+void initSerial()
+{
+	xfunc_out = xmit;
+
+	pinMode(B,0,OUTPUT);
+	pinMode(B,1,INPUT);
+	internalPullup(B,1,DISABLE);
+}
+
+void xprint(char* tx)
+{
+	while(*tx) 
+		xmit(*tx++);
+}
+

@@ -6,21 +6,24 @@
  * this stuff is worth it, you can buy me a coffee in return.
  * ----------------------------------------------------------------------------
  */
-
-#ifndef PTA
-#define PTA
+ 
+#ifndef PWM_T84
+#define PWM_T84
 
 #include <avr/io.h>
-#include <avr/pgmspace.h>
-#include <util/delay.h>
-#include <string.h>
-#include <stdio.h> 
-
 #include "macro.h"
-#include "digital.h"
-#include "analog.h"
-#include "pwm_t84.h"
-#include "tone_t84.h"
-#include "softSerial.h"
+
+#define PWM0A 0 // PWM #0
+#define PWM0B 1 // PWM #1
+#define PWM1A 2 // PWM #2
+#define PWM1B 3 // PWM #3
+
+#define updatePWM0A(value) (OCR0A = value);
+#define updatePWM0B(value) (OCR0B = value);
+#define updatePWM1A(value) (OCR1A = value);
+#define updatePWM1B(value) (OCR1B = value);
+
+void initPWM(uint8_t mode);
+void analogWrite(uint8_t ch, uint8_t val);
 
 #endif
