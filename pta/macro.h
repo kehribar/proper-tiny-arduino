@@ -9,9 +9,14 @@
 
 #ifndef MACROS
 #define MACROS
- 
-#define sbi(reg,bit) (reg |= (1<<bit))
-#define cbi(reg,bit) (reg &= ~(1<<bit))
-#define checkBit(reg,bit) (reg&(1<<bit))
+
+// Sets the desired bit of a register.
+#define sbi(reg,bit) (reg |= (1<<bit)) 
+
+// Clears the desired bit of a register.
+#define cbi(reg,bit) (reg &= ~(1<<bit)) 
+
+// Returns non-zero if the desired bit of a register is set.
+#define checkBit(reg,bit) (reg&(1<<bit)) 
 
 #endif
