@@ -13,6 +13,13 @@
 #include <avr/io.h>
 #include "macro.h"
 
+#define closeAdc() ADCSRA = 0x00;
+
+#define VREF_VDD	0
+#define VREF_1100mV	1
+#define VREF_2560mV	2 // Not available at Tiny13 and Tiny24/44/84
+
 uint16_t analogRead(uint8_t ch);
+void initADC(uint8_t VREF,uint8_t PRESCALE);
 
 #endif

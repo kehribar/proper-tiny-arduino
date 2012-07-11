@@ -9,34 +9,47 @@
 
 #include "analog.h"
 
-static uint8_t adcStatus = 0;
+uint8_t adcSetting = 0;
 
-inline void open_adc()
+void initADC(uint8_t VREF,uint8_t PRESCALE)
 {
-	// No prescale	 Voltage ref: VDD
-	ADCSRA = (1<<ADEN);
-	adcStatus = 1;
-}
+	sbi(ADCSRA,ADEN); // Enable the ADC peripheral
 
-inline void close_adc()
-{
-	ADCSRA = 0x00;
-	adcStatus = 0;
+	if(PRESCALE>128) PRESCALE = 128;
+
+	ADCSRA |= (PRESCALE>1); // Last three bits are prescale settings
+
+	switch(VREF)
+	{
+		case 0: // Use VCC as Vref.
+			adcSetting = 0;
+			break;
+		case 1: // 1.1V -> Available at x4 and x5 series.
+			sbi(adcSetting,REFS1);
+			break;
+		case 2: // 2.56V -> Available at x5 series.
+			#if defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny84__)
+				// "Not available for this series."		
+			#else
+				sbi(adcSetting,REFS1);
+				sbi(adcSetting,REFS2);
+			#endif
+			break;
+	}
+
 }
 
 uint16_t analogRead(uint8_t ch)
 {
 	uint16_t value;
 
-	if(adcStatus == 0)
-		open_adc();
+	ADMUX = adcSetting | ch; 	
 
-	ADMUX = ch; 	
-	
-	ADCSRA|=(1<<ADSC); // Start conversion
-	while(ADCSRA & (1<<ADSC)); // Wait for conversion
+	sbi(ADCSRA,ADSC); // Start conversion
 
-	value = ADCL;	value += ADCH << 8;
+	while(checkBit(ADCSRA,ADSC)); // Wait for conversion	
+
+	value = ADCL;	value += ADCH << 8; // Read the result
 
 	return value;
 }

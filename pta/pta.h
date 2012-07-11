@@ -10,18 +10,21 @@
 #ifndef PTA
 #define PTA
 
-#include <avr/io.h>
-#include <avr/pgmspace.h>
-#include <util/delay.h>
-#include <string.h>
 #include <stdio.h> 
+#include <string.h>
+#include <avr/io.h>
+#include <util/delay.h>
+#include <avr/pgmspace.h>
 
 #include "macro.h"
 #include "digital.h"
 #include "analog.h"
-#include "pwm_t84.h"
-#include "tone_t84.h"
 #include "softSerial.h"
+
+#if defined(__AVR_ATtiny84__)
+	#include "pwm_t84.h"
+	#include "tone_t84.h"
+#endif
 
 #define delay(value) _delay_ms(value)
 #define delayMicroseconds(value) _delay_us(value)
