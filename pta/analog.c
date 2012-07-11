@@ -15,19 +15,21 @@ void initADC(uint8_t VREF,uint8_t PRESCALE)
 {
 	sbi(ADCSRA,ADEN); // Enable the ADC peripheral
 
-	if(PRESCALE>128) PRESCALE = 128;
-
-	ADCSRA |= (PRESCALE>1); // Last three bits are prescale settings
+	ADCSRA |= PRESCALE; // Least significant three bits are prescale settings
 
 	switch(VREF)
 	{
 		case 0: // Use VCC as Vref.
 			adcSetting = 0;
 			break;
-		case 1: // 1.1V -> Available at x4 and x5 series.
-			sbi(adcSetting,REFS1);
+		case 1: // 1.1V 
+			#if defined(__AVR_ATtiny13__)
+				sbi(adcSetting,REFS0);
+			#else
+				sbi(adcSetting,REFS1);
+			#endif
 			break;
-		case 2: // 2.56V -> Available at x5 series.
+		case 2: // 2.56V -> Available only at x5 series.
 			#if defined(__AVR_ATtiny13__) || defined(__AVR_ATtiny84__)
 				// "Not available for this series."		
 			#else

@@ -19,6 +19,14 @@
 #define VREF_1100mV	1
 #define VREF_2560mV	2 // Not available at Tiny13 and Tiny24/44/84
 
+#define PRESCALE_2		1
+#define PRESCALE_4		2
+#define PRESCALE_8		4
+#define PRESCALE_16		8
+#define PRESCALE_32		16	
+#define PRESCALE_64		32
+#define PRESCALE_128	64
+
 uint16_t analogRead(uint8_t ch);
 void initADC(uint8_t VREF,uint8_t PRESCALE);
 
