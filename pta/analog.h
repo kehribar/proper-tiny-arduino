@@ -15,18 +15,19 @@
 
 #define closeAdc() ADCSRA = 0x00;
 
-#define VREF_VDD	0
-#define VREF_1100mV	1
-#define VREF_2560mV	2 // Not available at Tiny13 and Tiny24/44/84
+#define VREF_VCC		0
+#define VREF_1100mV		1
+#define VREF_2560mV		2 // Not available at Tiny13 and Tiny24/44/84
 
 #define PRESCALE_2		1
 #define PRESCALE_4		2
-#define PRESCALE_8		4
-#define PRESCALE_16		8
-#define PRESCALE_32		16	
-#define PRESCALE_64		32
-#define PRESCALE_128	64
+#define PRESCALE_8		3
+#define PRESCALE_16		4
+#define PRESCALE_32		5	
+#define PRESCALE_64		6
+#define PRESCALE_128	7
 
+uint8_t adcSetting;
 uint16_t analogRead(uint8_t ch);
 void initADC(uint8_t VREF,uint8_t PRESCALE);
 

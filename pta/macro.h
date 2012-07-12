@@ -19,4 +19,7 @@
 // Returns non-zero if the desired bit of a register is set.
 #define checkBit(reg,bit) (reg&(1<<bit)) 
 
+#define delay(value) _delay_ms(value)
+#define delayMicroseconds(value) _delay_us(value)
+
 #endif

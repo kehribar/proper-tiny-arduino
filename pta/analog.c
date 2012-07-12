@@ -9,10 +9,10 @@
 
 #include "analog.h"
 
-uint8_t adcSetting = 0;
-
 void initADC(uint8_t VREF,uint8_t PRESCALE)
 {
+	adcSetting = 0;
+	
 	sbi(ADCSRA,ADEN); // Enable the ADC peripheral
 
 	ADCSRA |= PRESCALE; // Least significant three bits are prescale settings
@@ -45,7 +45,7 @@ uint16_t analogRead(uint8_t ch)
 {
 	uint16_t value;
 
-	ADMUX = adcSetting | ch; 	
+	ADMUX = adcSetting | ch; // Set the desired channel
 
 	sbi(ADCSRA,ADSC); // Start conversion
 
@@ -53,12 +53,7 @@ uint16_t analogRead(uint8_t ch)
 
 	value = ADCL;	value += ADCH << 8; // Read the result
 
-	return value;
+	return value; // Return value
 }
  
- 
- 
- 
- 
- 
- 
+
