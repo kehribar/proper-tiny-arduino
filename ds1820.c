@@ -85,7 +85,7 @@ int main()
 			xprintf(PSTR("%X\t"),readVal[i]);
 		}
 	
-		/* 1st and 2nd bytes represents Temp values. Resoluton is 0.5 celcius degrees*/
+		/* 1st and 2nd bytes represents temp value. Resoluton is 0.5 celcius degrees*/
 		xprintf(PSTR("> Temp: %d c\r\n"),((readVal[1]<<8)+readVal[0])>>1); 
 		
 		i = onewire_resetPulse(); /* Send reset */
