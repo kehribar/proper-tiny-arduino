@@ -8,11 +8,11 @@
 PROJECT = main
 
 ### Source files and search directory
-CSRC    = main.c analog.c pwm_t84.c tone_t84.c softSerial.c
+CSRC    = main.c analog.c pwm_t84.c tone_t84.c softSerial.c onewire.c
 ASRC    = suart.S xitoa.S
 VPATH   = ./pta ./pta/elmChan_serial
 DEVICE  = attiny84
-F_OSC   = 1000000
+F_OSC   = 8000000
 AVRDUDE = avrdude -c usbtiny -p t84 -U flash:w:$(PROJECT).hex
 
 ###############################################################################
