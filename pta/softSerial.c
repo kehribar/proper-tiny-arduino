@@ -16,6 +16,7 @@ void initSerial()
 	pinMode(B,0,OUTPUT);
 	pinMode(B,1,INPUT);
 	internalPullup(B,1,DISABLE);
+	xmit('\n');
 }
 
 void xprint(char* tx)
