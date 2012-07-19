@@ -10,12 +10,12 @@
 #include "onewire.h"
 
 /* Data port is predefined as PORTB */
-#define DATA_PIN 3
+#define DATA_PIN 2
 
 /******************************************************************************
 / Drives the line HIGH or LOW
 /*****************************************************************************/
-inline void onewire_driveLine(uint8_t state)
+void onewire_driveLine(uint8_t state)
 {
 	pinMode(B,DATA_PIN,OUTPUT);
 	digitalWrite(B,DATA_PIN,state);
@@ -24,16 +24,16 @@ inline void onewire_driveLine(uint8_t state)
 /******************************************************************************
 / Reads the data line and returns the state
 /*****************************************************************************/
-inline uint8_t onewire_readLine()
+uint8_t onewire_readLine()
 {
 	uint8_t value;
 
 	pinMode(B,DATA_PIN,INPUT);
 	
 	if(digitalRead(B,DATA_PIN))	
-		value = 1;
-	else	
 		value = 0;
+	else	
+		value = 1;
 
 	return value;
 }
@@ -47,15 +47,15 @@ uint8_t onewire_resetPulse()
 	
   	onewire_driveLine(LOW);			// Drive the bus low
  	
- 	delayMicroseconds(480); 			// delay 480 microsecond (us)		
+ 	delayMicroseconds(500); 			// delay 480 microsecond (us)		
 
  	onewire_driveLine(HIGH);			// Release the bus
 	
-	delayMicroseconds(70);			// delay 70 microsecond (us)
+	delayMicroseconds(80);			// delay 70 microsecond (us)
 	
 	isDevicePresent = onewire_readLine();	//Sample for presence pulse from slave
 
- 	delayMicroseconds(410);			// delay 410 microsecond (us)		
+ 	delayMicroseconds(420);			// delay 410 microsecond (us)		
 	
 	onewire_driveLine(HIGH);		    	// Release the bus
 	
@@ -71,17 +71,17 @@ void onewire_writeBit(uint8_t bitValue)
 	{
 		//writing a bit '1'
 		onewire_driveLine(LOW);			// Drive the bus low
-		delayMicroseconds(6);			// delay 6 microsecond (us)
+		delayMicroseconds(10);			// delay 6 microsecond (us)
 		onewire_driveLine(HIGH); 		// Release the bus
-		delayMicroseconds(64);			// delay 64 microsecond (us)
+		delayMicroseconds(55);			// delay 64 microsecond (us)
 	}
 	else
 	{
 		//writing a bit '0'
 		onewire_driveLine(LOW);			// Drive the bus low
-		delayMicroseconds(60);			// delay 60 microsecond (us)
+		delayMicroseconds(65);			// delay 60 microsecond (us)
 		onewire_driveLine(HIGH); 		// Release the bus
-		delayMicroseconds(10);			// delay 10 microsecond (us)
+		delayMicroseconds(5);			// delay 10 microsecond (us)
 	}
 }	
 
@@ -95,13 +95,13 @@ uint8_t onewire_readBit()
 	onewire_driveLine(LOW);					// Drive the bus low
 	delayMicroseconds(6);					// delay 6 microsecond (us)
 	onewire_driveLine(HIGH); 				// Release the bus
-	delayMicroseconds(9);					// delay 9 microsecond (us)
+	delayMicroseconds(10);					// delay 9 microsecond (us)
 
 	value = onewire_readLine();				// Read the status of OW_PIN
 
 	delayMicroseconds(55);					// delay 55 microsecond (us)	
 
-	return value;
+	return !value;
 }
 
 /******************************************************************************
