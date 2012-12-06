@@ -62,6 +62,7 @@ PROJECT   := $(OBJDIR)/$(PROJECT)
 
 # Flags for C files
 CFLAGS += -fdata-sections -ffunction-sections
+CFLAGS += -Wno-deprecated-declarations -D__PROG_TYPES_COMPAT__
 CFLAGS += -Wl,--gc-sections
 CFLAGS += -std=$(CSTD)
 CFLAGS += -g$(DEBUG)

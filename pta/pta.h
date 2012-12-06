@@ -13,6 +13,7 @@
 #include <stdio.h> 
 #include <string.h>
 #include <avr/io.h>
+#include <stdlib.h> 
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
